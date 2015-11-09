@@ -1,8 +1,8 @@
 # Site wide configuration
 
-title:            Site Title
-locale:           en_US
-url:
+title:            William Showalter
+locale:           en_US/
+url: http://localhost:4000
 
 
 # Jekyll configuration
@@ -21,41 +21,19 @@ kramdown:
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
-  use_coderay: false
+  enable_coderay: false
 
 
 # Site owner
 owner:
-  name: Your Name
+  name: William Showalter
   avatar: bio-photo.jpg
-  bio: "Describe your self."
-  email:
-  disqus-shortname:
-  twitter: #username
-  facebook: #username
-  google:
-    plus: #username
-    analytics:
-    verify:
-    ad-client:
-    ad-slot:
-  bing-verify:
-  github: #username
-  stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
-  linkedin: #username
-  xing: #username
-  instagram: #username
-  lastfm: #username
-  tumblr: #username
-  pinterest: #username
-  foursquare: #username
-  steam: #username
-  dribbble: #username
-  youtube: #username
-  soundcloud: #username
-  weibo: #username
-  flickr: #username
-  codepen: #username
+  bio: Information Security. Enjoys traveling. Mississippi State University graduate student. Formerly of the University of Alaska Fairbanks. 
+  email: williamshowalter@gmail.com
+  twitter: willshowalter
+  github: williamshowalter
+  flickr: williamshowalter
+  linkedin: williamshowalter.com
 
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]
