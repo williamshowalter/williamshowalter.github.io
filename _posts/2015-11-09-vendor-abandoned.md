@@ -9,7 +9,7 @@ comments: true
 
 ## Background
 
-I've been exploring the functionality of my rather outdated Seagate NAS recently, partially to sate my own curiosity about my NAS, and partially for a graduate reasearch project. I presented my findings at the BSidesJackson 2015 conference on November 7th, 2015, and am posting my slides along with the accompanying white paper.
+I've been exploring the functionality of my rather outdated Seagate NAS recently, partially to sate my own curiosity about the NAS, and partially for a graduate reasearch project. I presented my findings at the BSidesJackson conference on November 7th, 2015, and am posting my slides along with the accompanying white paper.
 
 ## Abstract
 
@@ -18,9 +18,6 @@ Seagate’s network attached storage devices fall into this categorization. Seag
 
 ## Downloads
 
+#####[Download White Paper]({{ site.url }}/assets/Vendor_Abandoned.pdf)
 
-[Download White Paper]({{ site.url }}/assets/Vendor_Abandoned.pdf)
-
-
-[Download Slides from BSidesJackson]({{ site.url }}/assets/BSides2015.pdf)
-
+#####[Download Slides from BSidesJackson]({{ site.url }}/assets/BSides2015.pdf)
