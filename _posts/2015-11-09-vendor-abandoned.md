@@ -18,6 +18,6 @@ Seagate’s network attached storage devices fall into this categorization. Seag
 
 ## Downloads
 
-#####[Download White Paper]({{ site.url }}/assets/Vendor_Abandoned.pdf)
+##### [Download White Paper]({{ site.url }}/assets/Vendor_Abandoned.pdf)
 
-#####[Download Slides from BSidesJackson]({{ site.url }}/assets/BSides2015.pdf)
+##### [Download Slides from BSidesJackson]({{ site.url }}/assets/BSides2015.pdf)
