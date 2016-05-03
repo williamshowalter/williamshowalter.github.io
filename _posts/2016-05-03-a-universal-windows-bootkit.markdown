@@ -303,7 +303,7 @@ Appendix 2: Sample Hashes
 
 MD5
 ---
-
+  
 2c85404fe7d1891fd41fcee4c92ad305 dropper64.bin
 
 4dc2fc6ad7d9ed9fcf13d914660764cd driver32.sys.bin
@@ -322,7 +322,7 @@ d0cb0eb5588eb3b14c9b9a3fa7551c28 pe2\_decrypted.bin
 
 SHA1
 ----
-
+  
 4c3171b48d600e6337f1495142c43172d3b01770 dropper64.bin
 
 7ff22bd8667ce23e7db8c759bd03c15fb7226c76 driver32.sys.bin
@@ -344,6 +344,7 @@ Appendix 3: Screenshots
 
 Dropper
 -------
+  
 
 ![](/assets/a-universal-windows-bootkit/media/image12.png)
 
