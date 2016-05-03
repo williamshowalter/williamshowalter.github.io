@@ -1,9 +1,8 @@
 ---
 layout: post
-title: A Universal Windows Bootkit
+title: "A Universal Windows Bootkit"
 tags: [malware, reversing, reverse engineering, bootkits, stolen certificates]
-date: 2016-05-03T12:35:00.000000-06:00
-comments: true
+date: 2016-05-03T12:17:32-05:00
 ---
 An analysis of the MBR Bootkit referred to as "HDRoot"
 =================
