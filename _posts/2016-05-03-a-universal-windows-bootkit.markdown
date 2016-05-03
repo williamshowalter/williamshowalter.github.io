@@ -27,20 +27,14 @@ Introduction
 Sample:
 -------
 
-MD5: 2c85404fe7d1891fd41fcee4c92ad305
-
-SHA1: 4c3171b48d600e6337f1495142c43172d3b01770
-
+MD5: 2c85404fe7d1891fd41fcee4c92ad305  
+SHA1: 4c3171b48d600e6337f1495142c43172d3b01770  
 SHA256: a9a8dc4ae77b1282f0c8bdebd2643458fc1ceb3145db4e30120dd81676ff9b61
 
-Original Filename: net.exe
-
-Produce Name: Microsoft Windows Operating System
-
-Product Version: 6.1.7600.16385
-
-Time Stamp: 2012/08/06 13:12:39 UTC
-
+Original Filename: net.exe  
+Produce Name: Microsoft Windows Operating System  
+Product Version: 6.1.7600.16385  
+Time Stamp: 2012/08/06 13:12:39 UTC  
 Retrieved from malwr .
 
 This report
@@ -66,14 +60,12 @@ Dropper
 
 The dropper is designed to disguise itself as the Windows system utility net.exe. The properties on the executable attempt to mirror the settings found on a Windows 7 version of the utility, reporting it to a Microsoft program. When ran without parameters, HDRoot shows the options menu as if it were net.exe. That is where the similarities end, however.
 
-![](/assets/a-universal-windows-bootkit/media/image1.png)
-
+![](/assets/a-universal-windows-bootkit/media/image1.png)  
 Figure 1: Dropper disguising itself as net.exe
 
 The dropper executable, while masquerading as the Microsoft net command, has been signed with a digital certificate belonging to Guangzhou YuanLuo Technology Co, Ltd, a firm based in the city of Guangzhou, China who had their signing certificate stolen by the WINNTI group. The certificate has since been revoked, and, if the signing time and compilation dates on the executable are to be believed, it was signed in 2013 almost a year after this version was initially compiled.
 
-![](/assets/a-universal-windows-bootkit/media/image2.png)
-
+![](/assets/a-universal-windows-bootkit/media/image2.png)  
 Figure 2: Dropper's revoked certificate
 
 When ran with any of the legitimate net command parameters or with unrecognized parameters, no output is given. The only commands that provide output are the valid HDRoot commands programmed by the authors. Kaspersky, by analyzing an older sample from 2006, was able to get a “help” output, rather than the “net” output, which contained a list of commands for that version. Most of these commands still worked on the newer sample. All of the commands were five or less characters in length, and even short words like install were abbreviated to “inst”. Since the Kaspersky command listing was half a decade older than this sample, and that some of the commands from their listing were no longer present, I wrote a simple, and very slow, fuzzer to attempt to check all possible commands of five or less characters. Given the length of the other commands and that input appears to be case insensitive, this appears to be a sensible approach. The code for the fuzzer can be found in the supplemental files detailed in appendix 1.1. Screenshots for each command can be found in appendix 3.1, as well. No additional commands to the ones Kaspersky detailed were found by the fuzzer, and the table below is the known list of commands.
@@ -83,12 +75,10 @@ When ran with any of the legitimate net command parameters or with unrecognized 
 | check                 | Checks for the presence of the bootkit and the integrity if present.                                          |
 | clean                 | Removes the bootkit.                                                                                          |
 | inst &lt;Backdoor&gt; | Installs the bootkit                                                                                          |
-| info &lt;Backdoor&gt; | Shows information about the checksums and requirements for an executable if it was installed as the backdoor. |
-
+| info &lt;Backdoor&gt; | Shows information about the checksums and requirements for an executable if it was installed as the backdoor. |  
 Table 1: HDRoot dropper commands
 
-![](/assets/a-universal-windows-bootkit/media/image3.png)
-
+![](/assets/a-universal-windows-bootkit/media/image3.png)  
 Figure 3: inst command output
 
 VMProtect
@@ -96,8 +86,7 @@ VMProtect
 
 A notable hindrance to reversing the dropper is that it was packed using VMProtect. Unlike most packers, which decompress and then jump to the original executable code, VMProtect converts the x86 opcodes into an automatically generated language of bytecodes to be interpreted in its own emulator. Attempting to statically analyze the sample would prove an arduous task. There have been a few unpacking plugins for Ollydbg written for certain versions of VMProtect, but these are generally found in forum posts and are not well maintained. I believe this to be the reason Kaspersky did the bulk of their analysis with a different sample that was almost, but not quite, functionally the same. Not wanting to spend my time tackling VMProtect either, I instead used a number of dynamic analysis techniques.
 
-![](/assets/a-universal-windows-bootkit/media/image4.png)
-
+![](/assets/a-universal-windows-bootkit/media/image4.png)  
 Figure 4: Graph overview of VMProtect's emulator. Not fun.
 
 DEBUGFILE.sys - A signed kernel driver
@@ -107,16 +96,14 @@ At the time the dropper installs the bootkit, no changes to the filesystem or th
 
 The use of the kernel drivers is fairly straightforward. Without kernel access there is no way for malware to write directly to the physical disk as there are no Windows API calls available to userland processes for doing so. The dropper writes out the appropriate driver to C:\\Windows\\system32\\Drivers\\DEBUGFILE.sys, and then creates a service for it. This shows up in the memory image as a handle to the registry key HKLM\\System\\ControlSet001\\services\\DEBUGFILE. The service is ran and the driver \\Driver\\DEBUGFILE is created. DEBUGFILE.sys is also deleted from the disk. The driver is used by the dropper to proxy its direct access to the physical disk. A number of things are done in this process. The original MBR is backed up and then overwritten by the new bootkit MBR, and then weakly encrypted components are written to disk. Near the beginning of the disk is the component I’ve named the verifier, followed by two identical copies of the original MBR. In another section of the disk is the main component of the bootkit, rkImage, followed by the backdoor that was installed.
 
-<img src="/assets/a-universal-windows-bootkit/media/image5.png" width="623" height="130" />
-
+<img src="/assets/a-universal-windows-bootkit/media/image5.png" width="623" height="130" />  
 Figure 5: Physical Disk Layout written by DEBUGFILE.sys
 
 One peculiar thing the malware does is install a second copy of the rkImage and backdoor files. This copy is encrypted identically to the first, and positioned such that it ends exactly 2063 sectors from the end of the drive. What makes this strange is that nothing in the bootkit will ever transfer execution to the second copy, and that the second copy is only installed if the drive has at least 30% free space. Kaspersky erroneously identified this behavior as only installing if the disk has greater than 30% free space, rather than installing a redundant copy of itself. As can be seen in a Windows 7 screenshot from the appendix 1.3 files, the bootkit is perfectly capable of installing with less than 30% free space. The only guess I make as to the purpose of this second copy is for the indented backdoor to be able to identify if one of the copies has been modified after it starts. The dropper will also detect a modified copy.
 
 ![](/assets/a-universal-windows-bootkit/media/image6.png)
 
-![](/assets/a-universal-windows-bootkit/media/image7.png)
-
+![](/assets/a-universal-windows-bootkit/media/image7.png)  
 Figure 6: DEBUGFILE.sys
 
 MBR
@@ -126,12 +113,10 @@ For all x86 systems not running UEFI, the boot process starts with the BIOS load
 
 A normal MBR would look at the partition table to find the partition with the boot flag set, and then load the the volume boot sector of that partition and transfer execution. HDRoot’s MBR works similarly by calling interrupt 13 to read two sectors from disk into memory at the address 0x7A00 (through 0x7DFF). These are the verifier and the original MBR, which now has been loaded into the location where the MBR would have originally loaded on a non-infected system. The bootkit does not store these on disk in clear text, however. They are written to disk having been XOR’d with the byte value 0x76. Appendix 1.2 has a C utility that can be used to decrypt the values. A function at offset MBR+0x88 performs these read and decrypt operations, copies the partition table from the infected MBR to the original (incase the victim has changed any partitions since the bootkit was installed), and then transfers execution to the verifier.
 
-<img src="/assets/a-universal-windows-bootkit/media/image8.png" width="234" height="331" />
-
+<img src="/assets/a-universal-windows-bootkit/media/image8.png" width="234" height="331" />  
 Figure 7: Address layout of memory loaded before rkImage
 
-![](/assets/a-universal-windows-bootkit/media/image9.png)
-
+![](/assets/a-universal-windows-bootkit/media/image9.png)  
 Figure 8: Infected MBR code to load, decrypt verifier
 
 Verifier
@@ -191,8 +176,7 @@ HKLM\\SYSTEM\\CurrentControlSet\\Services\\Schedule\\Parameters\\ServiceDLL.
 
 rkImage will then return to 16-bit real mode, handing execution back to the original MBR at 0x7C00, allowing the boot process to continue and Windows to load.
 
-<img src="/assets/a-universal-windows-bootkit/media/image10.png" width="535" height="434" />
-
+<img src="/assets/a-universal-windows-bootkit/media/image10.png" width="535" height="434" />  
 Figure 9: Diagram showing the out-of-OS boot process.
 
 Schedule service DLL
@@ -204,8 +188,7 @@ The HDRoot authors chose to use the DLLMain function to start the backdoor proce
 
 Simultaneously the ServiceMain thread reverts the registry, and waits for the backdoor to start, sleeping and periodically checking for the flag to be set. After the flag is set it resumes the SpawnBackdoor thread, and then exits. In turn, the SpawnBackdoor thread unloads the DLL from memory and then exits itself.
 
-<img src="/assets/a-universal-windows-bootkit/media/image11.png" width="616" height="360" />
-
+<img src="/assets/a-universal-windows-bootkit/media/image11.png" width="616" height="360" />  
 Figure 10: Flow of the malicious Schedule service
 
 This has the effect of both threads exiting and the DLL unloading at almost the exact same time, guaranteeing that the service manager will have to restart the service, causing the legitimate service DLL to be loaded and run from the patched registry entry. In all my tests of this sample, not once did the real Windows service ever fail to start after running the bootkit. This is completely contrary to Kaspersky’s claim that the bootkit breaks the service and that all the victims must just not have cared or noticed that the service failed to start.
@@ -304,39 +287,25 @@ Appendix 2: Sample Hashes
 MD5
 ---
   
-2c85404fe7d1891fd41fcee4c92ad305 dropper64.bin
-
-4dc2fc6ad7d9ed9fcf13d914660764cd driver32.sys.bin
-
-8062cbccb2895fb9215b3423cdefa396 driver64.sys.bin
-
-c7fee0e094ee43f22882fb141c089cea pe1\_decrypted.bin
-
-d0cb0eb5588eb3b14c9b9a3fa7551c28 pe2\_decrypted.bin
-
-76e1e42988befbf13b4f934604206250 rkimage\_encrypted.bin
-
-613fd19d0abc3d018ead52afabd59fec rkimage\_decrypted.bin
-
+2c85404fe7d1891fd41fcee4c92ad305 dropper64.bin  
+4dc2fc6ad7d9ed9fcf13d914660764cd driver32.sys.bin  
+8062cbccb2895fb9215b3423cdefa396 driver64.sys.bin  
+c7fee0e094ee43f22882fb141c089cea pe1\_decrypted.bin  
+d0cb0eb5588eb3b14c9b9a3fa7551c28 pe2\_decrypted.bin  
+76e1e42988befbf13b4f934604206250 rkimage\_encrypted.bin  
+613fd19d0abc3d018ead52afabd59fec rkimage\_decrypted.bin  
 287fac6f4dac57253ac0061be1508f9d C\_932.NLS.bin
 
 SHA1
 ----
   
-4c3171b48d600e6337f1495142c43172d3b01770 dropper64.bin
-
-7ff22bd8667ce23e7db8c759bd03c15fb7226c76 driver32.sys.bin
-
-268dd909933c187d2798b5815674d70b930b498e driver64.sys.bin
-
-24a80cd100274e2c39180741aa688a4e73282552 pe1\_decrypted.bin
-
-5d6c1a3c2d827c714b764b1c5a3e7370ed737986 pe2\_decrypted.bin
-
-aaf677acc05ae94f98f836fb44fd672a4b2d90db rkimage\_encrypted.bin
-
-3c22ef94a737484e2f708393dcbabdfdb9d6cfbc rkimage\_decrypted.bin
-
+4c3171b48d600e6337f1495142c43172d3b01770 dropper64.bin  
+7ff22bd8667ce23e7db8c759bd03c15fb7226c76 driver32.sys.bin  
+268dd909933c187d2798b5815674d70b930b498e driver64.sys.bin  
+24a80cd100274e2c39180741aa688a4e73282552 pe1\_decrypted.bin  
+5d6c1a3c2d827c714b764b1c5a3e7370ed737986 pe2\_decrypted.bin  
+aaf677acc05ae94f98f836fb44fd672a4b2d90db rkimage\_encrypted.bin  
+3c22ef94a737484e2f708393dcbabdfdb9d6cfbc rkimage\_decrypted.bin  
 88912b5227145d3a715ae6eeebd5935c89955721 C\_932.NLS.bin
 
 Appendix 3: Screenshots
@@ -346,18 +315,14 @@ Dropper
 -------
   
 
-![](/assets/a-universal-windows-bootkit/media/image12.png)
-
+![](/assets/a-universal-windows-bootkit/media/image12.png)  
 Figure 11: Dropper's certificate
 
-![](/assets/a-universal-windows-bootkit/media/image13.png)
-
+![](/assets/a-universal-windows-bootkit/media/image13.png)  
 Figure 12: Check before inst
 
-![](/assets/a-universal-windows-bootkit/media/image14.png)
-
+![](/assets/a-universal-windows-bootkit/media/image14.png)  
 Figure 13: Check after inst
 
-![](/assets/a-universal-windows-bootkit/media/image15.png)
-
+![](/assets/a-universal-windows-bootkit/media/image15.png)  
 Figure 14: Info for backdoor
