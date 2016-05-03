@@ -21,6 +21,29 @@ The samples I analyzed in this report are detailed in appendix 1 and hashes are 
 
 <https://github.com/williamshowalter/hdroot-bootkit-analysis>
 
+- [Introduction](#Introduction)
+	- Sample:
+	- This report
+- Overview
+- Dropper
+	- VMProtect
+	- DEBUGFILE.sys - A signed kernel driver
+- MBR
+- Verifier
+- rkImage
+- Schedule service DLL
+- Conclusions
+- Appendix 1. Index of Supplemental File Repository
+	- 1.1 Binary Files – hdroot-bootkit-analysis/binaries
+	- 1.2 Code Files – hdroot-bootkit-analysis/code
+	- 1.3 Evidence Files – hdroot-bootkit-analysis/evidence
+	- 1.4 Ida Pro Files – hdroot-bootkit-analysis/ida pro
+- Appendix 2: Sample Hashes
+	- MD5
+	- SHA1
+- Appendix 3: Screenshots
+	- Dropper
+
 Introduction
 ============
 
@@ -287,33 +310,32 @@ Appendix 2: Sample Hashes
 MD5
 ---
   
-2c85404fe7d1891fd41fcee4c92ad305 dropper64.bin  
-4dc2fc6ad7d9ed9fcf13d914660764cd driver32.sys.bin  
-8062cbccb2895fb9215b3423cdefa396 driver64.sys.bin  
-c7fee0e094ee43f22882fb141c089cea pe1\_decrypted.bin  
-d0cb0eb5588eb3b14c9b9a3fa7551c28 pe2\_decrypted.bin  
-76e1e42988befbf13b4f934604206250 rkimage\_encrypted.bin  
-613fd19d0abc3d018ead52afabd59fec rkimage\_decrypted.bin  
-287fac6f4dac57253ac0061be1508f9d C\_932.NLS.bin
+2c85404fe7d1891fd41fcee4c92ad305	dropper64.bin  
+4dc2fc6ad7d9ed9fcf13d914660764cd	driver32.sys.bin  
+8062cbccb2895fb9215b3423cdefa396	driver64.sys.bin  
+c7fee0e094ee43f22882fb141c089cea	pe1\_decrypted.bin  
+d0cb0eb5588eb3b14c9b9a3fa7551c28	pe2\_decrypted.bin  
+76e1e42988befbf13b4f934604206250	rkimage\_encrypted.bin  
+613fd19d0abc3d018ead52afabd59fec	rkimage\_decrypted.bin  
+287fac6f4dac57253ac0061be1508f9d	C\_932.NLS.bin
 
 SHA1
 ----
   
-4c3171b48d600e6337f1495142c43172d3b01770 dropper64.bin  
-7ff22bd8667ce23e7db8c759bd03c15fb7226c76 driver32.sys.bin  
-268dd909933c187d2798b5815674d70b930b498e driver64.sys.bin  
-24a80cd100274e2c39180741aa688a4e73282552 pe1\_decrypted.bin  
-5d6c1a3c2d827c714b764b1c5a3e7370ed737986 pe2\_decrypted.bin  
-aaf677acc05ae94f98f836fb44fd672a4b2d90db rkimage\_encrypted.bin  
-3c22ef94a737484e2f708393dcbabdfdb9d6cfbc rkimage\_decrypted.bin  
-88912b5227145d3a715ae6eeebd5935c89955721 C\_932.NLS.bin
+4c3171b48d600e6337f1495142c43172d3b01770	dropper64.bin  
+7ff22bd8667ce23e7db8c759bd03c15fb7226c76	driver32.sys.bin  
+268dd909933c187d2798b5815674d70b930b498e	driver64.sys.bin  
+24a80cd100274e2c39180741aa688a4e73282552	pe1\_decrypted.bin  
+5d6c1a3c2d827c714b764b1c5a3e7370ed737986	pe2\_decrypted.bin  
+aaf677acc05ae94f98f836fb44fd672a4b2d90db	rkimage\_encrypted.bin  
+3c22ef94a737484e2f708393dcbabdfdb9d6cfbc	rkimage\_decrypted.bin  
+88912b5227145d3a715ae6eeebd5935c89955721	C\_932.NLS.bin
 
 Appendix 3: Screenshots
 =======================
 
 Dropper
 -------
-  
 
 ![](/assets/a-universal-windows-bootkit/media/image12.png)  
 Figure 11: Dropper's certificate
