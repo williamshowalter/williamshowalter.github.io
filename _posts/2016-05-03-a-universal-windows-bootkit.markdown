@@ -62,7 +62,7 @@ Original Filename: net.exe
 Produce Name: Microsoft Windows Operating System  
 Product Version: 6.1.7600.16385  
 Time Stamp: 2012/08/06 13:12:39 UTC  
-Retrieved from malwr \[1\](#references).
+Retrieved from malwr [\[1\]](#references).
 
 This report
 -----------
