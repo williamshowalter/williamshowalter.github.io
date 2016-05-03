@@ -236,21 +236,21 @@ References
 ===========
 
 \[1\]	
-"malwr," [Online]. Available: https://malwr.com/analysis/NGFiNDBmMWNmYjM0NDVmZWIxNTg5OWFkMDUwYmIzNTQ/.  
+"malwr," [Online]. Available: [[https://malwr.com/analysis/NGFiNDBmMWNmYjM0NDVmZWIxNTg5OWFkMDUwYmIzNTQ/]].  
 \[2\]	
-E. A. II, "Backdoor Built With Aheadlib Used in Targeted Attacks?," Trend Micro, [Online]. Available: http://blog.trendmicro.com/trendlabs-security-intelligence/backdoor-built-with-aheadlib-used-in-targeted-attacks/.  
+E. A. II, "Backdoor Built With Aheadlib Used in Targeted Attacks?," Trend Micro, [Online]. Available: [[http://blog.trendmicro.com/trendlabs-security-intelligence/backdoor-built-with-aheadlib-used-in-targeted-attacks/]].  
 \[3\]	
-Securelist, "WINNTI: More than just a game," [Online]. Available: https://securelist.com/analysis/internal-threats-reports/37029/winnti-more-than-just-a-game/.  
+Securelist, "WINNTI: More than just a game," [Online]. Available: [[https://securelist.com/analysis/internal-threats-reports/37029/winnti-more-than-just-a-game/]].  
 \[4\]	
-Securelist, "I am HDRoot Part 1," [Online]. Available: https://securelist.com/analysis/publications/72275/i-am-hdroot-part-1/.  
+Securelist, "I am HDRoot Part 1," [Online]. Available: [[https://securelist.com/analysis/publications/72275/i-am-hdroot-part-1/]].  
 \[5\]	
-X. Kovah, "Intermediate Intel x86," [Online]. Available: http://opensecuritytraining.info/IntermediateX86.html.  
+X. Kovah, "Intermediate Intel x86," [Online]. Available: [[http://opensecuritytraining.info/IntermediateX86.html]].  
 \[6\]	
-AMD, "AMD64 Architecture Programmer's Manual, Volume 2," [Online]. Available: http://developer.amd.com/wordpress/media/2012/10/24593_APM_v21.pdf.  
+AMD, "AMD64 Architecture Programmer's Manual, Volume 2," [Online]. Available: [[http://developer.amd.com/wordpress/media/2012/10/24593_APM_v21.pdf]].  
 \[7\]	
-Microsoft, "National Language Support (NLS) API Reference," [Online]. Available: https://www.microsoft.com/resources/msdn/goglobal/default.mspx.  
+Microsoft, "National Language Support (NLS) API Reference," [Online]. Available: [[https://www.microsoft.com/resources/msdn/goglobal/default.mspx]].  
 \[8\]	
-Microsoft, "Kernel-Mode Device Driver TSP," [Online]. Available: https://msdn.microsoft.com/en-us/library/ms725209(v=vs.85).aspx.
+Microsoft, "Kernel-Mode Device Driver TSP," [Online]. Available: [[https://msdn.microsoft.com/en-us/library/ms725209(v=vs.85).aspx]].
 
 
 
