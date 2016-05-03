@@ -101,7 +101,8 @@ When ran with any of the legitimate net command parameters or with unrecognized 
 | check                 | Checks for the presence of the bootkit and the integrity if present.                                          |
 | clean                 | Removes the bootkit.                                                                                          |
 | inst &lt;Backdoor&gt; | Installs the bootkit                                                                                          |
-| info &lt;Backdoor&gt; | Shows information about the checksums and requirements for an executable if it was installed as the backdoor. |  
+| info &lt;Backdoor&gt; | Shows information about the checksums and requirements for an executable if it was installed as the backdoor. |
+
 Table 1: HDRoot dropper commands
 
 ![](/assets/a-universal-windows-bootkit/media/image3.png)  
@@ -229,6 +230,28 @@ The one stage of the attack in which the bootkit did not make good use of hiding
 Another criticism that can be made is the extremely weak use of encryption. The XOR cipher is little more than obfuscation and was trivial to figure out even just looking at the encrypted sectors on the disk. It can be argued, however, that since the entire contents of the bootkit is code that will be decrypted before it can be run, there is little point in hiding it from anything but simple scans, as it could just be captured from memory by analysts. To that end, the simple cipher serves its purpose of not matching the signatures for executables or of a boot sector while on disk.
 
 Overall I was impressed with the level of detail that went into making this malware which is capable of installing itself on any Windows version dating back 20 years, with the exception of those newer ones using UEFI. The lack of UEFI support is unlikely to be an issue when targeting server systems, however, especially with virtualization on the rise - very few virtual environments are virtualizing UEFI in their guests. The small touches, such as anticipating that the drive may have been repartitioned, are particularly impressive. Clearly significant thought and work went into the creation of this bootkit, and it is a mistake to dismiss it as amateur.
+
+References
+===========
+
+\[1\]	
+"malwr," [Online]. Available: https://malwr.com/analysis/NGFiNDBmMWNmYjM0NDVmZWIxNTg5OWFkMDUwYmIzNTQ/.  
+\[2\]	
+E. A. II, "Backdoor Built With Aheadlib Used in Targeted Attacks?," Trend Micro, [Online]. Available: http://blog.trendmicro.com/trendlabs-security-intelligence/backdoor-built-with-aheadlib-used-in-targeted-attacks/.  
+\[3\]	
+Securelist, "WINNTI: More than just a game," [Online]. Available: https://securelist.com/analysis/internal-threats-reports/37029/winnti-more-than-just-a-game/.  
+\[4\]	
+Securelist, "I am HDRoot Part 1," [Online]. Available: https://securelist.com/analysis/publications/72275/i-am-hdroot-part-1/.  
+\[5\]	
+X. Kovah, "Intermediate Intel x86," [Online]. Available: http://opensecuritytraining.info/IntermediateX86.html.  
+\[6\]	
+AMD, "AMD64 Architecture Programmer's Manual, Volume 2," [Online]. Available: http://developer.amd.com/wordpress/media/2012/10/24593_APM_v21.pdf.  
+\[7\]	
+Microsoft, "National Language Support (NLS) API Reference," [Online]. Available: https://www.microsoft.com/resources/msdn/goglobal/default.mspx.  
+\[8\]	
+Microsoft, "Kernel-Mode Device Driver TSP," [Online]. Available: https://msdn.microsoft.com/en-us/library/ms725209(v=vs.85).aspx.
+
+
 
 Appendix 1. Index of Supplemental File Repository
 =================================================
