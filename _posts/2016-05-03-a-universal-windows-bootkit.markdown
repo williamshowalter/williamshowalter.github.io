@@ -4,8 +4,9 @@ title: "A Universal Windows Bootkit"
 tags: [malware, reversing, reverse engineering, bootkits, stolen certificates]
 date: 2016-05-03T12:17:32-05:00
 ---
-An analysis of the MBR Bootkit referred to as "HDRoot"
-=================
+### An analysis of the MBR Bootkit referred to as "HDRoot"
+
+##### [Download White Paper]({{ site.url }}/assets/a-universal-windows-bootkit/The Universal Windows Bootkit.pdf)
 
 Executive Summary
 =================
@@ -112,7 +113,9 @@ Figure 5: Physical Disk Layout written by DEBUGFILE.sys
 
 One peculiar thing the malware does is install a second copy of the rkImage and backdoor files. This copy is encrypted identically to the first, and positioned such that it ends exactly 2063 sectors from the end of the drive. What makes this strange is that nothing in the bootkit will ever transfer execution to the second copy, and that the second copy is only installed if the drive has at least 30% free space. Kaspersky erroneously identified this behavior as only installing if the disk has greater than 30% free space, rather than installing a redundant copy of itself. As can be seen in a Windows 7 screenshot from the appendix 1.3 files, the bootkit is perfectly capable of installing with less than 30% free space. The only guess I make as to the purpose of this second copy is for the indented backdoor to be able to identify if one of the copies has been modified after it starts. The dropper will also detect a modified copy.
 
-![](/assets/a-universal-windows-bootkit/media/image6.png)![](/assets/a-universal-windows-bootkit/media/image7.png)
+![](/assets/a-universal-windows-bootkit/media/image6.png)
+
+![](/assets/a-universal-windows-bootkit/media/image7.png)
 
 Figure 6: DEBUGFILE.sys
 
