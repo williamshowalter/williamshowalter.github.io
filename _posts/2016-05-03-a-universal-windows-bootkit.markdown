@@ -97,12 +97,12 @@ Figure 2: Dropper's revoked certificate
 
 When run with any of the legitimate net command parameters or with unrecognized parameters, no output is given. The only commands that provide output are the valid HDRoot commands programmed by the authors. Kaspersky, by analyzing an older sample from 2006, was able to get a “help” output, rather than the “net” output, which contained a list of commands for that version. Most of these commands still worked on the newer sample. All of the commands were five or less characters in length, and even short words like install were abbreviated to “inst”. Since the Kaspersky command listing was half a decade older than this sample, and that some of the commands from their listing were no longer present, I wrote a simple, and very slow, fuzzer to attempt to check all possible commands of five or less characters. Given the length of the other commands and that input appears to be case insensitive, this appears to be a sensible approach. The code for the fuzzer can be found in the supplemental files detailed in appendix 1.1. Screenshots for each command can be found in appendix 3.1, as well. No additional commands to the ones Kaspersky detailed were found by the fuzzer, and the table below is the known list of commands.
 
-| Command               | Description                                                                                                   |
+| Command                            | Description                                                                                       |
 |------------------------------------|--------------------------------------------------------------------------------------------------|
-| check                 | Checks for the presence of the bootkit and the integrity if present.                                          |
-| clean                 | Removes the bootkit.                                                                                          |
-| inst &lt;Backdoor&gt; | Installs the bootkit                                                                                          |
-| info &lt;Backdoor&gt; | Shows information about the checksums and requirements for an executable if it was installed as the backdoor. |
+| check                              | Checks for the presence of the bootkit and the integrity if present.                              |
+| clean                              | Removes the bootkit.                                                                              |
+| inst &lt;Backdoor&gt;              | Installs the bootkit                                                                              |
+| info &lt;Backdoor&gt;              | Shows information about the checksums and requirements for an executable if it was installed as the backdoor. |
 
 Table 1: HDRoot dropper commands
 
