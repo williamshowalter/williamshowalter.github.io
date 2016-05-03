@@ -6,8 +6,6 @@ date: 2016-05-03T12:17:32-05:00
 ---
 ## An analysis of the MBR Bootkit referred to as "HDRoot"
 
-[Download White Paper]({{ site.url }}/assets/a-universal-windows-bootkit/The Universal Windows Bootkit.pdf)
-
 Executive Summary
 =================
 
@@ -17,9 +15,11 @@ The bootkit in question uses two stolen signing certificates and is capable of r
 
 HDRoot represents a serious commitment in time and effort to develop, and likely has been in use or development since 2006. The sample analyzed here dates to sometime in 2012 or 2013, and is the same sample Kasperky reports to have analyzed in their debut post on HDRoot. However, all evidence points to Kaspersky doing their analysis with a 2006 sample, criticizing problems in the malware that are not actually present. Additionally, they provide no hashes or other information on the actual sample they used.
 
-The samples I analyzed in this report are detailed in appendix 1 and hashes are provided in appendix 2. They can be found in the following git repo:
+The samples I analyzed in this report are detailed in appendix 1 and hashes are provided in appendix 2. They can be found in the following git repo below:
 
 <https://github.com/williamshowalter/hdroot-bootkit-analysis>
+
+[Download White Paper]({{ site.url }}/assets/a-universal-windows-bootkit/The Universal Windows Bootkit.pdf)
 
 Table of Contents
 =================
