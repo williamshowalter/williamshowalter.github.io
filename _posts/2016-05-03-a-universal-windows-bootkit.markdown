@@ -6,7 +6,7 @@ date: 2016-05-03T12:17:32-05:00
 ---
 ### An analysis of the MBR Bootkit referred to as "HDRoot"
 
-##### [Download White Paper]({{ site.url }}/assets/a-universal-windows-bootkit/The Universal Windows Bootkit.pdf)
+#### [Download White Paper]({{ site.url }}/assets/a-universal-windows-bootkit/The Universal Windows Bootkit.pdf)
 
 Executive Summary
 =================
@@ -21,28 +21,31 @@ The samples I analyzed in this report are detailed in appendix 1 and hashes are 
 
 <https://github.com/williamshowalter/hdroot-bootkit-analysis>
 
-- [Introduction](#Introduction)
-	- Sample:
-	- This report
-- Overview
-- Dropper
-	- VMProtect
-	- DEBUGFILE.sys - A signed kernel driver
-- MBR
-- Verifier
-- rkImage
-- Schedule service DLL
-- Conclusions
-- Appendix 1. Index of Supplemental File Repository
-	- 1.1 Binary Files – hdroot-bootkit-analysis/binaries
-	- 1.2 Code Files – hdroot-bootkit-analysis/code
-	- 1.3 Evidence Files – hdroot-bootkit-analysis/evidence
-	- 1.4 Ida Pro Files – hdroot-bootkit-analysis/ida pro
-- Appendix 2: Sample Hashes
-	- MD5
-	- SHA1
-- Appendix 3: Screenshots
-	- Dropper
+Table of Contents
+=================
+
+- [Introduction](#introduction)
+	- [Sample](#sample)
+	- [This report](#this-report)
+- [Overview](#overview)
+- [Dropper](#dropper)
+	- [VMProtect](#vmprotect)
+	- [DEBUGFILE.sys - A signed kernel driver](#debugfilesys---a-signed-kernel-driver)
+- [MBR](#mbr)
+- [Verifier](#verifier)
+- [rkImage](#rkimage)
+- [Schedule service DLL](#schedule-service-dll)
+- [Conclusions](#conclusions)
+- [Appendix 1. Index of Supplemental File Repository](#appendix-1-index-of-supplemental-file-repository)
+	- [1.1 Binary Files](#1.1 Binary Files – hdroot-bootkit-analysis/binaries)
+	- [1.2 Code Files](#1.2 Code Files – hdroot-bootkit-analysis/code)
+	- [1.3 Evidence Files](#evidence-files--hdroot-bootkit-analysisevidence)
+	- [1.4 Ida Pro Files](#ida-pro-files--hdroot-bootkit-analysisida-pro)
+- [Appendix 2: Sample Hashes](#appendix-2-sample-hashes)
+	- [MD5](#md5)
+	- [SHA1](#sha1)
+- [Appendix 3: Screenshots](#appendix-3-screenshots)
+	- [Dropper](#dropper-1)
 
 Introduction
 ============
