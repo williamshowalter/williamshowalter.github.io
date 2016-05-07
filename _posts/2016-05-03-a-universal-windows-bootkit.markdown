@@ -19,7 +19,7 @@ The samples I analyzed in this report are detailed in appendix 1 and hashes are 
 
 <https://github.com/williamshowalter/hdroot-bootkit-analysis>
 
-[Download White Paper]({{ site.url }}/assets/a-universal-windows-bootkit/The Universal Windows Bootkit.pdf)
+[Download White Paper]({{ site.url }}/assets/a-universal-windows-bootkit/A Universal Windows Bootkit.pdf)
 
 Table of Contents
 =================
